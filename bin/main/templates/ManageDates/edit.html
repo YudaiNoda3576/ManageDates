@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <!-- Bootstrapの設定 -->
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>Edit</title>
+</head>
+
+<body>
+	<div class="col-sm-5">
+		<div class="page-header">
+			<h2>日付け登録画面</h2>
+		</div>
+		<!-- th:objectでModelに登録されているオブジェクトを取得できる.
+		     つまり、戻るボタンを押した際などに値をそのままフォームに反映させることが出来る -->
+		<form method="post" th:action="@{/ManageDates/confirm}" th:object="${manageDatesForm}">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>日付け名</th>
+						<td>
+							<div class="form-group">
+								<input type="text" class="form-control" name="name" th:value="*{name}"/>
+								<!-- Controllerのvalidationの処理　定型句として覚える -->
+								<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+							</div>
+						</td>
+				</tr>
+				<tr>
+					<th>加減値（年）</th>
+						<td>
+							<div class="form-group">
+								<input type="text" class="form-control" name="year" th:value="*{year}"/>
+								<div th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+							</div>
+						</td>
+				</tr>
+				<tr>
+					<th>加減値（月）</th>
+						<td>
+							<div class="form-group">
+								<input type="text" class="form-control" name="month" th:value="*{month}"/>
+								<div th:if="${#fields.hasErrors('month')}" th:errors="*{month}"></div>
+							</div>
+						</td>
+				</tr>
+				<tr>
+					<th>加減値（日）</th>
+						<td>
+							<div class="form-group">
+								<input type="text" class="form-control" name="date" th:value="*{date}"/>
+								<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+							</div>
+						</td>
+				</tr>
+			</table>
+			<input type="submit" value="確認" >
+			<!-- <button class="btn btn-default" type="submit">戻る</button> -->
+		</form>
+	</div>
+</body>
+</html>
