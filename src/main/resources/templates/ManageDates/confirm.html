@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <!-- Bootstrapの設定 -->
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>Confirm</title>
+</head>
+<body>
+	<h1>確認ページ</h1>
+	<div th:object = "${manageDatesForm}">
+		<p th:text="*{name}"></p>
+		<p th:text="*{year}"></p>
+		<p th:text="*{month}"></p>
+		<p th:text=" *{date}"></p>
+	<!-- ControllerにPostを受け取れるように設定する -->
+	<form method="post" action="#" th:action="@{/ManageDates/form}">
+		 <input type="hidden" name="name" th:value="*{name}">
+		 <input type="hidden" name="year" th:value="*{year}">
+		 <input type="hidden" name="month" th:value="*{month}">
+		 <input type="hidden" name="date" th:value="*{date}">
+		 <input type="submit" value="戻る">
+	</form>
+	<form method="post" action="#" th:action="@{/ManageDates/complete}">
+		 <input type="hidden" name="name" th:value="*{name}">
+		 <input type="hidden" name="year" th:value="*{year}">
+		 <input type="hidden" name="month" th:value="*{month}">
+		 <input type="hidden" name="date" th:value="*{date}">
+		 <input type="submit" value="完了">
+	</form>
+	</div>
+</body>
+</html>
