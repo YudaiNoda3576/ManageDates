@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <!-- Bootstrapの設定 -->
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>index</title>
+</head>
+<body>
+<h3 th:text="${success}"></h3>
+<h3 th:text="${failed}"></h3>
+<h2>計算の基準となる日付けを入力してください（８桁）</h2>
+	<div th:object=@{searchForm}>
+	 	<form action="ManageDates" method="post" >
+			<input type="text" name="standard-date"/>
+			<button class="btn btn-default" type="submit" >新規登録</button>
+			<button class="btn btn-primary" type="submit" >計算実行</button>
+			<button class="btn btn-danger" type="submit" >一覧表示</button>
+		</form> 
+	</div>
+	<table>
+		<thead class="thead">
+			<tr>
+				<th>日付ID</th>
+				<th>日付名</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="#">
+		</tbody>
+	</table>
+	<table>
+		<thead class="thead">
+			<tr>
+				<th>計算結果</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="result : ${manageDatesResult}">
+				<td th:text="${result}"></td>
+		</tbody>
+	</table>
+	<table>
+		<thead class="thead">
+			<tr>
+				<th>計算式（年/月/日）</th>
+				<th>編集</th>
+				<th>削除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="">
+				<td th:text="${} + '/' + ${} + '/' + ${}"></td>
+				<td th:href="@{/edit/{id}"> 
+					<a class="btn btn-primary btn-sm"  role="button" aria-pressed="true">編集</a>
+				</td>
+				<td th:href="@{/delete/{id}"> 
+					<a class="btn btn-danger btn-sm"  role="button" aria-pressed="true">編集</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</body>
+</html>

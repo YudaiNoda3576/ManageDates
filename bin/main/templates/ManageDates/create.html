@@ -6,17 +6,17 @@
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
     <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-    <title>edit</title>
+    <title>create</title>
 </head>
 
 <body>
 	<div class="col-sm-5">
 		<div class="page-header">
-			<h2>編集画面</h2>
+			<h2>新規登録画面</h2>
 		</div>
 		<!-- th:objectでModelに登録されているオブジェクトを取得できる.
 		     つまり、戻るボタンを押した際などに値をそのままフォームに反映させることが出来る -->
-		<form method="post" th:action="@{edit/{id}}" th:object="${manageDatesForm}">
+		<form method="post" th:action="@{/create}" th:object="${manageDatesForm}">
 			<table class="table table-bordered table-hover">
 			<tr>
 					<th>日付けID</th>
@@ -66,7 +66,7 @@
 						</td>
 				</tr>
 			</table>
-			<button type="submit" class="btn-success">更新</button>
+			<button type="submit" class="btn-success">登録</button>
 			<button class="btn btn-default" type="submit">戻る</button>
 		</form>
 	</div>

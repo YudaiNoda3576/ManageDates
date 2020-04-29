@@ -1,38 +1,111 @@
 package com.example.demo.app;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.demo.entity.ManageDates;
+import com.example.demo.service.ManageDatesService;
 
 @Controller
 @RequestMapping("/ManageDates")
 public class ManageDatesController {
 	
-	@GetMapping("/form")
-	public String form(ManageDatesForm manageDatesForm, Model model) {
-		model.addAttribute("title", "Edit Form");
-		return "ManageDates/edit";
+	private final ManageDatesService manageDatesService;
+	
+	@Autowired
+	public ManageDatesController(ManageDatesService manageDatesService) {
+		this.manageDatesService = manageDatesService;
 	}
-//	戻るボタンを受け取る
-	@PostMapping("/form")
-	public String formGoBack(ManageDatesForm manageDatesForm, Model model) {
-		model.addAttribute("title", "Edit Form");
-		return "ManageDates/edit";
+
+	
+	@GetMapping
+	public String index(Model model, @ModelAttribute("input") String input, SearchForm searchForm) {
+		model.addAttribute("seachForm", searchForm);
+		return "index";
 	}
 	
-	@PostMapping("/confirm")
-	public String confirm(@Validated ManageDatesForm manageDatesForm,
+	@PostMapping
+	public String search(@RequestParam("input") String input,
+			@Validated SearchForm searchForm,
 			BindingResult result,
 			Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("title", "ManageDates Form");
-			return "ManageDates/edit";
+//		計算結果
+		if(!result.hasErrors()) {
+			List<LocalDate>manageDatesResult = manageDatesService.search(input);
+			model.addAttribute("manageDatesResult", manageDatesResult);
+		} else {
+			model.addAttribute("failed", "入力値に誤りがあります");
+		}
+		return "index";
 	}
-	model.addAttribute("title", "Confirm Page");
-	return "ManageDates/confirm";
-  }
+	
+//	新規登録
+	@GetMapping("/create")
+	public String create(ManageDates manageDates, Model model) {
+		model.addAttribute("manageDates", manageDates);
+		return"create";
+	}
+	
+	@PostMapping("/create")
+	public String create(@ModelAttribute @Validated ManageDatesForm manageDatesForm, 
+			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+//		Formの値をEntityへ詰め直す
+		ManageDates manageDates = new ManageDates();
+		
+		manageDates.setId(manageDatesForm.getId());
+		manageDates.setName(manageDatesForm.getName());
+		manageDates.setYear(manageDatesForm.getYear());
+		manageDates.setMonth(manageDatesForm.getMonth());
+		manageDates.setDate(manageDatesForm.getDate());
+		
+		manageDatesService.insert(manageDates);
+		
+		if(!result.hasErrors()) {
+			manageDatesService.insert(manageDates);
+			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
+			return "redirect:/ManageDates";
+		} else {
+			model.addAttribute("manageDatesForm", manageDates);
+			model.addAttribute("failed", "不正値に誤りがあります");
+			return "create";
+		}
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String getId(@RequestParam String id, Model model) {
+		Optional<ManageDates> result = manageDatesService.findOne(id);
+		model.addAttribute("manageDates", result);
+		return "edit";
+	}
+	
+	@PostMapping("/edit/{id}")
+	public String getId(@PathVariable String id, @ModelAttribute ManageDates manageDates,
+			Model model, RedirectAttributes redirectAttributes) {
+		manageDates.setId(id);
+		manageDatesService.update(manageDates);
+		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
+		return "redirect:/ManageDates";
+	}
+	
+	
+	@GetMapping("/delete/{id}")
+	public String delete(@RequestParam String id, Model model) {
+		manageDatesService.delete(id);
+		model.addAttribute("success", "削除が成功しました");
+		return "redirect:/index";
+	}
 }

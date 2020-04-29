@@ -32,4 +32,10 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7-1'
+    // https://mvnrepository.com/artifact/org.webjars.bower/jquery
+	compile group: 'org.webjars.bower', name: 'jquery', version: '1.11.1'
+    
+	
 }
