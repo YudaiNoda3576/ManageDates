@@ -10,6 +10,8 @@
 </head>
 
 <body>
+	<h3 th:text="${success}"></h3>
+	<h3 th:text="${failed}"></h3>
 	<div class="col-sm-5">
 		<div class="page-header">
 			<h2>新規登録画面</h2>
@@ -66,8 +68,8 @@
 						</td>
 				</tr>
 			</table>
-			<button type="submit" class="btn-success">登録</button>
-			<button class="btn btn-default" type="submit">戻る</button>
+			<button type="submit" class="btn-success" >登録</button>
+			<a href="/managedates" class="btn btn-secondary btn-md ml-2" role="button" aria-pressed="true">戻る</a>
 		</form>
 	</div>
 </body>

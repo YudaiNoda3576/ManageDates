@@ -21,7 +21,7 @@ import com.example.demo.entity.ManageDates;
 import com.example.demo.service.ManageDatesService;
 
 @Controller
-@RequestMapping("/ManageDates")
+@RequestMapping("/managedates")
 public class ManageDatesController {
 	
 	private final ManageDatesService manageDatesService;
@@ -34,7 +34,7 @@ public class ManageDatesController {
 	
 	@GetMapping
 	public String index(Model model, @ModelAttribute("input") String input, SearchForm searchForm) {
-		model.addAttribute("seachForm", searchForm);
+		model.addAttribute("searchForm", searchForm);
 		return "index";
 	}
 	
@@ -46,9 +46,12 @@ public class ManageDatesController {
 //		計算結果
 		if(!result.hasErrors()) {
 			List<LocalDate>manageDatesResult = manageDatesService.search(input);
+			model.addAttribute("manageDatesCal", manageDatesService.findAll());
 			model.addAttribute("manageDatesResult", manageDatesResult);
+			model.addAttribute("val", input);
 		} else {
 			model.addAttribute("failed", "入力値に誤りがあります");
+			model.addAttribute("val", input);
 		}
 		return "index";
 	}
@@ -62,7 +65,9 @@ public class ManageDatesController {
 	
 	@PostMapping("/create")
 	public String create(@ModelAttribute @Validated ManageDatesForm manageDatesForm, 
-			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+			BindingResult result, 
+			Model model, 
+			RedirectAttributes redirectAttributes) {
 //		Formの値をEntityへ詰め直す
 		ManageDates manageDates = new ManageDates();
 		
@@ -77,9 +82,9 @@ public class ManageDatesController {
 		if(!result.hasErrors()) {
 			manageDatesService.insert(manageDates);
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
-			return "redirect:/ManageDates";
+			return "redirect:/managedates";
 		} else {
-			model.addAttribute("manageDatesForm", manageDates);
+			model.addAttribute("manageDatesForm", manageDatesForm);
 			model.addAttribute("failed", "不正値に誤りがあります");
 			return "create";
 		}

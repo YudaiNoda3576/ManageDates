@@ -45,6 +45,7 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 			LocalDate inputDate = LocalDate.parse(input, formatter); 
 			
 			List<ManageDates> manageDates = dao.findAll();
+			
 			List<LocalDate> sumDate = new ArrayList<LocalDate>();
 //			各レコードから計算用の年月日を取得。入力値と合算させる。
 			for(ManageDates n : manageDates) {
