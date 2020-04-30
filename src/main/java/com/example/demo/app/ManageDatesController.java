@@ -32,7 +32,7 @@ public class ManageDatesController {
 	}
 
 	
-	@GetMapping
+	@GetMapping("/index")
 	public String index(Model model, @ModelAttribute("input") String input, SearchForm searchForm) {
 		model.addAttribute("searchForm", searchForm);
 		return "index";

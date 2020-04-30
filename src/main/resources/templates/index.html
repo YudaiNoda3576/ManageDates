@@ -17,7 +17,7 @@
 			<input type="text" name="standard-date"/>
 			<button class="btn btn-default" type="submit" th:href=@{create}>新規登録</button>
 			<button class="btn btn-primary" type="submit" >計算実行</button>
-			<button class="btn btn-danger" type="submit" >一覧表示</button>
+			<!-- <button class="btn btn-danger" type="submit" >一覧表示</button> -->
 		</form> 
 	</div>
 	<table>
@@ -28,6 +28,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<!-- 擬似ブロックの生成。値が存在しない場合にタグを表示しないようにできる -->
 			<th:block th:if="${val}">
 				<tr th:each="obj : ${manageDatesCal}">
 					<td th:text="${obj.id}"></td>
@@ -56,11 +57,10 @@
 			</tr>
 		</thead>
 		<tbody>
-		<!-- 擬似ブロックの生成。値が存在しない場合にタグを表示しないようにできる -->
 			<th:block th:if="${val}">		
 				<tr th:each="obj : ${manageDatesCal}">
 					<td th:text="${obj.year} + '/' + ${obj.month} + '/' + ${obj.date}"></td>
-					<!-- 動的に表示 -->
+					<!-- 動的に変更 -->
 					<td th:href="@{/edit/{id}(id=${obj.id})"> 
 						<a class="btn btn-primary btn-sm"  th:href="@{/edit/{id}(id=${obj.id})}" role="button" aria-pressed="true">編集</a>
 					</td>
