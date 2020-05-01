@@ -24,10 +24,6 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		this.dao = dao;
 	}
 	
-	@Override
-	public void insert(ManageDates manageDates) {
-		dao.insert(manageDates);
-	}
 
 	@Override
 	public List<ManageDates> findAll() {
@@ -68,19 +64,22 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 			} catch (EmptyResultDataAccessException e) {
 				throw new ManageDatesNotFoundException("指定された値が存在しません");
 			}
-			
 		}
 
 		@Override
-		public void update(ManageDates manageDates) {
-			 dao.update(manageDates);
+		public void insert(ManageDates manageDates) {
+			dao.insert(manageDates);
 			
+		}
+		
+		@Override
+		public void update(ManageDates manageDates) {
+			 dao.update(manageDates);	
 		}
 
 		@Override
 		public void delete(String id) {
 			dao.delete(id);
-
 		}
 		
 }

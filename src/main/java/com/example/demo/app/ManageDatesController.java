@@ -21,7 +21,7 @@ import com.example.demo.entity.ManageDates;
 import com.example.demo.service.ManageDatesService;
 
 @Controller
-@RequestMapping("/managedates")
+@RequestMapping("/")
 public class ManageDatesController {
 	
 	private final ManageDatesService manageDatesService;
@@ -58,13 +58,13 @@ public class ManageDatesController {
 	
 //	新規登録
 	@GetMapping("/create")
-	public String create(ManageDates manageDates, Model model) {
-		model.addAttribute("manageDates", manageDates);
-		return"create";
+	public String create(ManageDatesForm manageDatesForm, Model model) {
+		model.addAttribute("manageDatesForm", manageDatesForm);
+		return"/create";
 	}
 	
 	@PostMapping("/create")
-	public String create(@ModelAttribute @Validated ManageDatesForm manageDatesForm, 
+	public String create(@ModelAttribute ManageDatesForm manageDatesForm, 
 			BindingResult result, 
 			Model model, 
 			RedirectAttributes redirectAttributes) {
@@ -82,12 +82,13 @@ public class ManageDatesController {
 		if(!result.hasErrors()) {
 			manageDatesService.insert(manageDates);
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
-			return "redirect:/managedates";
+			return "redirect:/index";
 		} else {
 			model.addAttribute("manageDatesForm", manageDatesForm);
 			model.addAttribute("failed", "不正値に誤りがあります");
-			return "create";
+			return "/create";
 		}
+		
 	}
 	
 	@GetMapping("/edit/{id}")
@@ -103,7 +104,7 @@ public class ManageDatesController {
 		manageDates.setId(id);
 		manageDatesService.update(manageDates);
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
-		return "redirect:/ManageDates";
+		return "redirect:/";
 	}
 	
 	

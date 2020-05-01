@@ -21,9 +21,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	public ManageDatesDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	
-
+//	全件検索
 	@Override
 	public List<ManageDates> findAll() {
 		String sql = "SELECT id, name, year, month, date FROM manage_dates";
@@ -62,10 +60,11 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 		
 		return manageDatesOpt;
 	}
-	
+//	新規登録
+//	新規登録・更新・削除にupdateメソッドを使う
 	@Override
 	public void insert(ManageDates manageDates) {
-		jdbcTemplate.update("INSERT INTO manage_dates(id, name, year, month, date) VALUES (?, ?, ?, ? ,?)",
+		 jdbcTemplate.update("INSERT INTO manage_dates(id, name, year, month, date) VALUES (?, ?, ?, ? ,?)",
 				manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
 		
 	}
