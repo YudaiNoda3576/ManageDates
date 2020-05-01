@@ -14,12 +14,13 @@
 <h2>計算の基準となる日付けを入力してください（８桁）</h2>
 	<div th:object=${searchForm}>
 	 	<form action="/" method="post" >
-			<input type="text" name="standard-date"/>
-			<a class="btn btn-default" role="button" th:href="@{/create}">新規登録</a>
-			<button class="btn btn-primary" type="submit" >計算実行</button>
-			<!-- <button class="btn btn-danger" type="submit" >一覧表示</button> -->
+		 	<div class="form-group">
+				<input type="text" name="input" th:value="${val}"/>
+		 	</div>
+				<button class="btn btn-primary" type="submit" >計算実行</button>
 		</form> 
 	</div>
+	<a class="btn btn-default" role="button" th:href="@{/create}">新規登録</a>
 	<table>
 		<thead class="thead">
 			<tr>
@@ -61,11 +62,11 @@
 				<tr th:each="obj : ${manageDatesCal}">
 					<td th:text="${obj.year} + '/' + ${obj.month} + '/' + ${obj.date}"></td>
 					<!-- 動的に変更 -->
-					<td th:href="@{/edit/{id}(id=${obj.id})"> 
+					<td> 
 						<a class="btn btn-primary btn-sm"  th:href="@{/edit/{id}(id=${obj.id})}" role="button" aria-pressed="true">編集</a>
 					</td>
-					<td th:href="@{/delete/{id}"> 
-						<a class="btn btn-danger btn-sm"  th:href="@{/delete/{id}(id=${obj.id})}" role="button" aria-pressed="true">編集</a>
+					<td> 
+						<a class="btn btn-danger btn-sm"  th:href="@{/delete/{id}(id=${obj.id})}" role="button" aria-pressed="true">削除</a>
 					</td>
 				</tr>
 			</th:block>
