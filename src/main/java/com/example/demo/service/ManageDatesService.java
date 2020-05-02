@@ -17,12 +17,12 @@ public interface ManageDatesService {
 	
 	List<LocalDate> search(String input);
 	
-    Optional<ManageDates> findOne(String id);
+    Optional<ManageDates> findOne(int id);
 	
 	void insert(ManageDates manageDates);
 	
 	boolean update(ManageDates manageDates);
 	
-	boolean delete(String id);
+	boolean delete(int id);
 	
 }

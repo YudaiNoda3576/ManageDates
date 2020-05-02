@@ -21,11 +21,22 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	public ManageDatesDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+//	テーブルの件数を取得
+	@Override
+	public int count() {
+		int count = jdbcTemplate.queryForObject("SELECT COUNT * FROM manage_dates", Integer.class);
+		return count;
+	}
+	
 //	全件検索
 	@Override
 	public List<ManageDates> findAll() {
-		String sql = "SELECT id, name, year, month, date FROM manage_dates";
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+//		String sql = "SELECT * FROM manage_dates";
+//		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
+//		下の1行にまとめた
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList("SELECT * FROM manage_dates");
+//		結果返却用の変数
 		List<ManageDates>list = new ArrayList<ManageDates>();
 		for(Map<String, Object> result : resultList) {
 			ManageDates manageDates = new ManageDates();
@@ -42,7 +53,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	
 	@Override
 //	Optionalはnullに対処する方法
-	public Optional<ManageDates> findOne(String id) {
+	public Optional<ManageDates> findOne(int id) {
 		String sql = "SELECT id, name, year, month, date"
 //				
 				+ "WHERE id = ?";
@@ -67,8 +78,8 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	public void insert(ManageDates manageDates) {
 		 jdbcTemplate.update("INSERT INTO manage_dates(id, name, year, month, date) VALUES (?, ?, ?, ? ,?)",
 				manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
-		
 	}
+	
 	@Override
 	public int update(ManageDates manageDates) {
 //		return jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
@@ -80,7 +91,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	}
 
 	@Override
-	public int delete(String id) {
+	public int delete(int id) {
 		 int result = jdbcTemplate.update("DELETE FROM manage_dates WHERE id = ?", id);
 		 
 		 return result;

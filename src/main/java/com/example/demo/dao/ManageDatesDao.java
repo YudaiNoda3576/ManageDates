@@ -17,7 +17,7 @@ public interface ManageDatesDao {
 	
 	int update(ManageDates manageDates);
 	
-	int delete(String id);
+	int delete(int id);
 	
 	
 }

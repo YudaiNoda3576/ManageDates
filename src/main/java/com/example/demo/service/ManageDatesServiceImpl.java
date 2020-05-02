@@ -56,7 +56,7 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		}
 
 		@Override
-		public Optional<ManageDates> findOne(String id) {
+		public Optional<ManageDates> findOne(int id) {
 //			値がなければ例外発生
 //			チェック例外を非チェック例外に直して、一括で管理するようにする（議論あり）
 			try {
@@ -87,7 +87,7 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		
 
 		@Override
-		public boolean delete(String id) {
+		public boolean delete(int id) {
 			int num = dao.delete(id);
 			
 			boolean result = false;
