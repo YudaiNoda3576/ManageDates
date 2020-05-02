@@ -50,9 +50,9 @@ public class ManageDatesController {
 			Model model) {
 //		計算結果
 		if(!result.hasErrors()) {
-			List<LocalDate>manageDatesResult = manageDatesService.search(input);
+			List<LocalDate>manageDatesCalResult = manageDatesService.search(input);
 			model.addAttribute("manageDatesCal", manageDatesService.findAll());
-			model.addAttribute("manageDatesResult", manageDatesResult);
+			model.addAttribute("manageDatesCalResult", manageDatesCalResult);
 			model.addAttribute("val", input);
 		} else {
 			model.addAttribute("failed", "入力値に誤りがあります");
