@@ -79,9 +79,7 @@ public class ManageDatesController {
 		manageDates.setYear(manageDatesForm.getYear());
 		manageDates.setMonth(manageDatesForm.getMonth());
 		manageDates.setDate(manageDatesForm.getDate());
-		
-		manageDatesService.insert(manageDates);
-		
+	
 		if(!result.hasErrors()) {
 			manageDatesService.insert(manageDates);
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
@@ -122,6 +120,37 @@ public class ManageDatesController {
 		return "redirect:/";
 	}
 	
+//	@GetMapping("/edit/{id}")
+//	public String getId(@PathVariable String id, 
+//			Model model,
+//			RedirectAttributes redirectAttributes) {
+//		ManageDates result = manageDatesService.findOne(id);
+//		model.addAttribute("manageDates", result);
+//		return "edit";
+//	}
+//	
+//	@PostMapping("/edit/{id}")
+//	public String getId(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
+//			Model model, RedirectAttributes redirectAttributes) {
+//		
+//		if(id != null && id.length() > 0) {
+//			
+//		ManageDates manageDates = manageDatesService.findOne(id);
+//		
+//	 	manageDatesForm.setId(manageDates.getId());
+//	 	manageDatesForm.setName(manageDates.getName());
+//	 	manageDatesForm.setYear(manageDates.getYear());
+//	 	manageDatesForm.setMonth(manageDates.getMonth());
+//	 	manageDatesForm.setDate(manageDates.getDate());
+//        
+//		model.addAttribute("manageDatesForm", manageDatesForm);
+//		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
+//		
+//		}
+//		return "redirect:/";
+//	}
+	
+	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable String id, Model model) {
 		manageDatesService.delete(id);
@@ -141,8 +170,5 @@ public class ManageDatesController {
 		 	manageDatesForm.setDate(manageDates.getDate());
 	        
 		 	return manageDatesForm;
-	    }
-	 
-//	 
-	
+	    }	
 }

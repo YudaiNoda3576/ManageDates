@@ -69,6 +69,18 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 				throw new ManageDatesNotFoundException("指定された値が存在しません");
 			}
 		}
+	
+//	@Override
+//	public ManageDates findOne(String id) {
+//		値がなければ例外発生
+//		チェック例外を非チェック例外に直して、一括で管理するようにする（議論あり）
+//		try {
+//			return dao.findOne(id);
+//		} catch (EmptyResultDataAccessException e) {
+//			throw new ManageDatesNotFoundException("指定された値が存在しません");
+//		}
+//	}
+	
 
 		@Override
 		public void insert(ManageDates manageDates) {

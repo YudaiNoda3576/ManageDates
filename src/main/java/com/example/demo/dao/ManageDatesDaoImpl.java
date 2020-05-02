@@ -58,8 +58,8 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 //		String sql = "SELECT id, name, year, month, date"		
 //				+ "WHERE id = ?";
 //		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
-//		一件取得/上の処理を1行にまとめた↓　WHEREのPreparedStatementと第二引数のidが紐づく
-		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" + " WHERE id = ?", id);
+////		一件取得/上の処理を1行にまとめた↓　WHEREのPreparedStatementと第二引数のidが紐づく
+		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates2" + " WHERE id = ?", id);
 //		結果返却用の変数
 		ManageDates manageDates = new ManageDates();
 		
@@ -73,6 +73,27 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 		
 		return manageDatesOpt;
 	}
+	
+//	@Override
+//	public ManageDates findOne(String id) {
+//
+//		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" 
+//				+ " WHERE id = ?"
+//				, id);
+//		結果返却用の変数
+//		ManageDates manageDates = new ManageDates();
+//		
+//		manageDates.setId((String)result.get("id"));
+//		manageDates.setName((String)result.get("name"));
+//		manageDates.setYear((int)result.get("year"));
+//		manageDates.setMonth((int)result.get("month"));
+//		manageDates.setDate((int)result.get("date"));
+//	
+//		return manageDates;
+//	}
+	
+	
+	
 //	新規登録
 //	新規登録・更新・削除にupdateメソッドを使う
 	@Override
@@ -93,7 +114,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 
 	@Override
 	public int delete(String id) {
-		 int result = jdbcTemplate.update("DELETE FROM manage_dates WHERE id = ?", id);
+		 int result = jdbcTemplate.update("DELETE FROM manage_dates2 WHERE id = ?", id);
 		 
 		 return result;
 	}
