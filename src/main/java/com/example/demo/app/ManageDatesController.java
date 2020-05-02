@@ -1,7 +1,6 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import com.example.demo.entity.ManageDates;
 import com.example.demo.service.ManageDatesService;
@@ -98,14 +96,16 @@ public class ManageDatesController {
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String getId(@RequestParam String id, Model model) {
+	public String getId(@PathVariable String id, 
+			Model model,
+			RedirectAttributes redirectAttributes) {
 		Optional<ManageDates> result = manageDatesService.findOne(id);
 		model.addAttribute("manageDates", result);
 		return "edit";
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String getId(@PathVariable("id")String id, @ModelAttribute ManageDatesForm manageDatesForm,
+	public String getId(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
 			Model model, RedirectAttributes redirectAttributes) {
 //		ManageDatesの取得.Optionalでラップ
 		Optional<ManageDates> manageDatesOpt = manageDatesService.findOne(id);
@@ -123,7 +123,7 @@ public class ManageDatesController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(@RequestParam String id, Model model) {
+	public String delete(@PathVariable String id, Model model) {
 		manageDatesService.delete(id);
 		model.addAttribute("success", "削除が成功しました");
 		return "redirect:/index";

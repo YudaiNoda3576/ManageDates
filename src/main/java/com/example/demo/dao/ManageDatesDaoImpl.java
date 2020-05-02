@@ -59,7 +59,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 //				+ "WHERE id = ?";
 //		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
 //		一件取得/上の処理を1行にまとめた↓　WHEREのPreparedStatementと第二引数のidが紐づく
-		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" + "WHERE id = ?", id);
+		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" + " WHERE id = ?", id);
 //		結果返却用の変数
 		ManageDates manageDates = new ManageDates();
 		

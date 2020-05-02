@@ -21,40 +21,40 @@
 				  <input id="id" type="text" class="form-control" name="id" th:value="${id}" /> 
 				  
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
-				  <small id="emailHelp" th:if="${#fields.hasErrors('id')}" 
-				    th:errors="*{id}" class="err"></small>
+				 <!--  <small id="emailHelp" th:if="${#fields.hasErrors('id')}" 
+				    th:errors="*{id}" class="err"></small> -->
 			  </div> 
 			  
 			  <div class="form-group">
 			    <label for = "name">日付け名</label>
 				  <input id="name" type="text" class="form-control" name="name" th:value="${name}" /> 
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
-				  <small id="emailHelp" th:if="${#fields.hasErrors('name')}" 
-				    th:errors="*{name}" class="err"></small>
+				  <!-- <small id="emailHelp" th:if="${#fields.hasErrors('name')}" 
+				    th:errors="*{name}" class="err"></small> -->
 			  </div> 
 			  
 			  <div class="form-group">
 			    <label for = "year">年（加減値）</label>
 				  <input id="year" type="text" class="form-control" name="year" th:value="${year}" /> 
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
-				  <small id="emailHelp" th:if="${#fields.hasErrors('year')}" 
-				    th:errors="*{year}" class="err"></small>
+				  <!-- <small id="emailHelp" th:if="${#fields.hasErrors('year')}" 
+				    th:errors="*{year}" class="err"></small> -->
 			  </div> 
 			  
 			  <div class="form-group">
 			    <label for = "month">月（加減値）</label>
 				  <input id="month" type="text" class="form-control" name="month" th:value="${month}" /> 
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
-				  <small id="emailHelp" th:if="${#fields.hasErrors('month')}" 
-				    th:errors="*{month}" class="err"></small>
+				 <!--  <small id="emailHelp" th:if="${#fields.hasErrors('month')}" 
+				    th:errors="*{month}" class="err"></small> -->
 			  </div> 
 			  
 			  <div class="form-group">
 			    <label for = "date">日(加減値)</label>
 				  <input id="date" type="text" class="form-control" name="date" th:value="${date}" /> 
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
-				  <small id="emailHelp" th:if="${#fields.hasErrors('date')}" 
-				    th:errors="*{date}" class="err"></small>
+				 <!--  <small id="emailHelp" th:if="${#fields.hasErrors('date')}" 
+				    th:errors="*{date}" class="err"></small> -->
 			  </div> 
 				
 			<button type="submit" class="btn btn-md btn-primary active">更新</button>
