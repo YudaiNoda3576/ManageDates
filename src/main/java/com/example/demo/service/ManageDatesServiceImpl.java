@@ -24,6 +24,10 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		this.dao = dao;
 	}
 	
+//	@Override
+//	public int count() {
+//		return dao.count();
+//	}
 
 	@Override
 	public List<ManageDates> findAll() {

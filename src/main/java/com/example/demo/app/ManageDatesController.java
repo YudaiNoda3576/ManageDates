@@ -24,12 +24,15 @@ import com.example.demo.service.ManageDatesService;
 @RequestMapping("/")
 public class ManageDatesController {
 	
-	private final ManageDatesService manageDatesService;
-	
+//	private final ManageDatesService manageDatesService;
+//	
+//	@Autowired
+//	public ManageDatesController(ManageDatesService manageDatesService) {
+//		this.manageDatesService = manageDatesService;
+//	}
+//	上の処理を1行でまとめた
 	@Autowired
-	public ManageDatesController(ManageDatesService manageDatesService) {
-		this.manageDatesService = manageDatesService;
-	}
+	ManageDatesService manageDatesService;
 
 	
 	@GetMapping("/index")
@@ -93,14 +96,14 @@ public class ManageDatesController {
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String getId(@RequestParam int id, Model model) {
+	public String getId(@RequestParam String id, Model model) {
 		Optional<ManageDates> result = manageDatesService.findOne(id);
 		model.addAttribute("manageDates", result);
 		return "edit";
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String getId(@PathVariable int id, @ModelAttribute ManageDates manageDates,
+	public String getId(@PathVariable String id, @ModelAttribute ManageDates manageDates,
 			Model model, RedirectAttributes redirectAttributes) {
 		manageDates.setId(id);
 		manageDatesService.update(manageDates);
@@ -108,11 +111,11 @@ public class ManageDatesController {
 		return "redirect:/";
 	}
 	
-	
 	@GetMapping("/delete/{id}")
-	public String delete(@RequestParam int id, Model model) {
+	public String delete(@RequestParam String id, Model model) {
 		manageDatesService.delete(id);
 		model.addAttribute("success", "削除が成功しました");
 		return "redirect:/index";
 	}
+	
 }

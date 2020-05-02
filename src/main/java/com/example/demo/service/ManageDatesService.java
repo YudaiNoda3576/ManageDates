@@ -11,7 +11,7 @@ import com.example.demo.entity.ManageDates;
 
 public interface ManageDatesService {
 	
-	
+//	int count();
 	
 	List<ManageDates> findAll();
 	
@@ -23,6 +23,6 @@ public interface ManageDatesService {
 	
 	boolean update(ManageDates manageDates);
 	
-	boolean delete(int id);
+	boolean delete(String id);
 	
 }

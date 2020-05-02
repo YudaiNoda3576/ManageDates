@@ -7,8 +7,7 @@ import com.example.demo.entity.ManageDates;
 
 public interface ManageDatesDao {
 	
-//	void insertManageDates(ManageDates manageDates);
-	int count();
+//	int count();
 	
 	List<ManageDates> findAll();
 	
@@ -18,7 +17,7 @@ public interface ManageDatesDao {
 	
 	int update(ManageDates manageDates);
 	
-	int delete(int id);
+	int delete(String id);
 	
 	
 }

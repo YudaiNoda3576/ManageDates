@@ -23,11 +23,12 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	}
 	
 //	テーブルの件数を取得
-	@Override
-	public int count() {
-		int count = jdbcTemplate.queryForObject("SELECT COUNT * FROM manage_dates", Integer.class);
-		return count;
-	}
+//	@Override
+//	public int count() {
+////		カウントの結果、カラムを一つだけ取得する場合にqueryForObjectを使う。第二引数に戻り値のオブジェクトのclassを指定
+//		int count = jdbcTemplate.queryForObject("SELECT COUNT * FROM manage_dates", Integer.class);
+//		return count;
+//	}
 	
 //	全件検索
 	@Override
@@ -53,7 +54,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	
 	@Override
 //	Optionalはnullに対処する方法
-	public Optional<ManageDates> findOne(int id) {
+	public Optional<ManageDates> findOne(String id) {
 		String sql = "SELECT id, name, year, month, date"
 //				
 				+ "WHERE id = ?";
@@ -91,7 +92,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(String id) {
 		 int result = jdbcTemplate.update("DELETE FROM manage_dates WHERE id = ?", id);
 		 
 		 return result;
