@@ -15,10 +15,11 @@
 	</div>
 		<!-- th:objectでModelに登録されているオブジェクトを取得できる.
 		     つまり、戻るボタンを押した際などに値をそのままフォームに反映させることが出来る -->
-		<form class="form-signin m-auto" method="post" th:action="@{/edit/{id}}" th:object="${manageDatesForm}">
+		<form class="form-signin m-auto" method="post" th:action="@{/edit/{id}}" th:object="${manageDatesForm}" style="max-width: 50%;">
 			  <div class="form-group">
 			    <label for = "id">日付けID</label>
 				  <input id="id" type="text" class="form-control" name="id" th:value="${id}" /> 
+				  
 				  <!-- Controllerのvalidationの処理　定型句として覚える -->
 				  <small id="emailHelp" th:if="${#fields.hasErrors('id')}" 
 				    th:errors="*{id}" class="err"></small>

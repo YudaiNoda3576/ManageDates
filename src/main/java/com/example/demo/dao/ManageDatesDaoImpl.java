@@ -22,7 +22,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-//	テーブルの件数を取得
+//	テーブルの件数を取得/カウント機能は余裕があったら実装する
 //	@Override
 //	public int count() {
 ////		カウントの結果、カラムを一つだけ取得する場合にqueryForObjectを使う。第二引数に戻り値のオブジェクトのclassを指定
@@ -55,12 +55,12 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	@Override
 //	Optionalはnullに対処する方法
 	public Optional<ManageDates> findOne(String id) {
-		String sql = "SELECT id, name, year, month, date"
-//				
-				+ "WHERE id = ?";
-//		一件取得
-		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
-		
+//		String sql = "SELECT id, name, year, month, date"		
+//				+ "WHERE id = ?";
+//		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
+//		一件取得/上の処理を1行にまとめた↓　WHEREのPreparedStatementと第二引数のidが紐づく
+		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" + "WHERE id = ?", id);
+//		結果返却用の変数
 		ManageDates manageDates = new ManageDates();
 		
 		manageDates.setId((String)result.get("id"));
