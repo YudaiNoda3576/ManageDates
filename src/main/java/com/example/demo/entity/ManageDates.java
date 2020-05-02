@@ -9,7 +9,7 @@ public class ManageDates {
 	public ManageDates() {}
 	
 	
-	private int id;
+	private String id;
 	private String name;
 	private int year ;
 	private int month ;

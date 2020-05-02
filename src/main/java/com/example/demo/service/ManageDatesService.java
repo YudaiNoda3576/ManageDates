@@ -17,7 +17,7 @@ public interface ManageDatesService {
 	
 	List<LocalDate> search(String input);
 	
-    Optional<ManageDates> findOne(int id);
+    Optional<ManageDates> findOne(String id);
 	
 	void insert(ManageDates manageDates);
 	

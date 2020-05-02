@@ -8,6 +8,7 @@ import com.example.demo.entity.ManageDates;
 public interface ManageDatesDao {
 	
 //	void insertManageDates(ManageDates manageDates);
+	int count();
 	
 	List<ManageDates> findAll();
 	
