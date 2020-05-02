@@ -67,7 +67,7 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		}
 
 		@Override
-		public void insert(ManageDates manageDates) {
+		public void insert(ManageDates manageDates ) {
 			dao.insert(manageDates);
 			
 		}

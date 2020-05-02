@@ -6,7 +6,7 @@
     <link th:href="@{/org.webjars/bootstrap/4.4.1/css/bootstrap.min.css}" rel="stylesheet"></link>
     <script th:src="@{/org.webjars.bower/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/org.webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
-    <title>edit</title>
+    <title>create</title>
 </head>
 
 <body>
@@ -16,23 +16,23 @@
 		</div>
 		<!-- th:objectでModelに登録されているオブジェクトを取得できる.
 		     つまり、戻るボタンを押した際などに値をそのままフォームに反映させることが出来る -->
-		<form method="post" th:action="@{edit/{id}}" th:object="${manageDatesForm}">
+		<form method="post" th:action="@{/edit/{id}(id=${manageDatesCal.id})}" th:object="${manageDatesForm}">
 			<table class="table table-bordered table-hover">
-			<tr>
+			 <tr>
 					<th>日付けID</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="id" th:value="*{id}"/>
+								<input type="text" class="form-control" name="id" th:value="${id}"/>
 								<!-- Controllerのvalidationの処理　定型句として覚える -->
 								<div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
 							</div>
 						</td>
-				</tr>
+				</tr> 
 				<tr>
 					<th>日付け名</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="name" th:value="*{name}"/>
+								<input type="text" class="form-control" name="name" th:value="${name}"/>
 								<!-- Controllerのvalidationの処理　定型句として覚える -->
 								<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 							</div>
@@ -42,7 +42,7 @@
 					<th>加減値（年）</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="year" th:value="*{year}"/>
+								<input type="text" class="form-control" name="year" th:value="${year}"/>
 								<div th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
 							</div>
 						</td>
@@ -51,7 +51,7 @@
 					<th>加減値（月）</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="month" th:value="*{month}"/>
+								<input type="text" class="form-control" name="month" th:value="${month}"/>
 								<div th:if="${#fields.hasErrors('month')}" th:errors="*{month}"></div>
 							</div>
 						</td>
@@ -60,14 +60,14 @@
 					<th>加減値（日）</th>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="date" th:value="*{date}"/>
-								<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+								<input type="text" class="form-control" name="date" th:value="${date}"/>
+								<div th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div> 
 							</div>
 						</td>
 				</tr>
 			</table>
 			<button type="submit" class="btn-success">更新</button>
-			<button class="btn btn-default" type="submit">戻る</button>
+			<a href="/index" class="btn btn-secondary btn-md ml-2" role="button" aria-pressed="true">戻る</a>
 		</form>
 	</div>
 </body>

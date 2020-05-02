@@ -64,7 +64,7 @@ public class ManageDatesController {
 	}
 	
 	@PostMapping("/create")
-	public String create(@ModelAttribute ManageDatesForm manageDatesForm, 
+	public String create(@ModelAttribute @Validated ManageDatesForm manageDatesForm, 
 			BindingResult result, 
 			Model model, 
 			RedirectAttributes redirectAttributes) {
@@ -84,9 +84,10 @@ public class ManageDatesController {
 			redirectAttributes.addFlashAttribute("success", "新規登録が完了しました");
 			return "redirect:/index";
 		} else {
+			model.addAttribute("manageDatesCal", manageDatesService.findAll());
 			model.addAttribute("manageDatesForm", manageDatesForm);
 			model.addAttribute("failed", "不正値に誤りがあります");
-			return "/create";
+			return "create";
 		}
 		
 	}

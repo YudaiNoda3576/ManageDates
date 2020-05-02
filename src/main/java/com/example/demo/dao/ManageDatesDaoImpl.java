@@ -44,6 +44,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 //	Optionalはnullに対処する方法
 	public Optional<ManageDates> findOne(String id) {
 		String sql = "SELECT id, name, year, month, date"
+//				
 				+ "WHERE id = ?";
 //		一件取得
 		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
