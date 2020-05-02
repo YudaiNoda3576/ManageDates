@@ -4,9 +4,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.dao.ManageDatesDao;
 import com.example.demo.entity.ManageDates;
 
 public interface ManageDatesService {
+	
+	
 	
 	List<ManageDates> findAll();
 	
@@ -16,8 +21,8 @@ public interface ManageDatesService {
 	
 	void insert(ManageDates manageDates);
 	
-	void update(ManageDates manageDates);
+	boolean update(ManageDates manageDates);
 	
-	void delete(String id);
+	boolean delete(String id);
 	
 }

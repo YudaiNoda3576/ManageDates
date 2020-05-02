@@ -71,13 +71,18 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	}
 	@Override
 	public int update(ManageDates manageDates) {
-		return jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
-			manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
-	
+//		return jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
+//			manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
+		 int result = jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
+			manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate()); 
+		 
+			 return result;
 	}
 
 	@Override
 	public int delete(String id) {
-		return jdbcTemplate.update("DELETE FROM manage_dates WHERE id = ?", id);
+		 int result = jdbcTemplate.update("DELETE FROM manage_dates WHERE id = ?", id);
+		 
+		 return result;
 	}
 }

@@ -73,13 +73,29 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		}
 		
 		@Override
-		public void update(ManageDates manageDates) {
-			 dao.update(manageDates);	
-		}
+		public boolean update(ManageDates manageDates) {
+//			一件更新
+			int num = dao.update(manageDates);
+			
+			boolean result = false;
+			
+			if(num > 0) {
+				result = true;
+			} 
+				return result;
+			}
+		
 
 		@Override
-		public void delete(String id) {
-			dao.delete(id);
+		public boolean delete(String id) {
+			int num = dao.delete(id);
+			
+			boolean result = false;
+			
+			if(num > 0) {
+				result = true;
+			} 
+				return result;
+			}
 		}
 		
-}
