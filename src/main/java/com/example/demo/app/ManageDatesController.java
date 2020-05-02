@@ -1,6 +1,7 @@
 package com.example.demo.app;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.example.demo.entity.ManageDates;
 import com.example.demo.service.ManageDatesService;
@@ -103,11 +105,20 @@ public class ManageDatesController {
 	}
 	
 	@PostMapping("/edit/{id}")
-	public String getId(@PathVariable String id, @ModelAttribute ManageDates manageDates,
+	public String getId(@PathVariable("id")String id, @ModelAttribute ManageDatesForm manageDatesForm,
 			Model model, RedirectAttributes redirectAttributes) {
-		manageDates.setId(id);
-		manageDatesService.update(manageDates);
+//		ManageDatesの取得.Optionalでラップ
+		Optional<ManageDates> manageDatesOpt = manageDatesService.findOne(id);
+//		Formへ詰め直すメソッドを使用、ラムダ式を使えば1行で終わらせられる
+		Optional<ManageDatesForm> manageDatesFormOpt = manageDatesOpt.map(t -> makeManageDatesForm(t));
+//		TaskFormの中身がnullで無ければ中身を取り出す
+		if(manageDatesFormOpt.isPresent()) {
+			manageDatesForm = manageDatesFormOpt.get();
+		}
+		
+		model.addAttribute("manageDatesForm", manageDatesForm);
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
+		
 		return "redirect:/";
 	}
 	
@@ -117,5 +128,21 @@ public class ManageDatesController {
 		model.addAttribute("success", "削除が成功しました");
 		return "redirect:/index";
 	}
+	
+//	manageDatesのデータをフォームに詰めるメソッド
+	 private ManageDatesForm makeManageDatesForm(ManageDates manageDates) {
+	    	
+		 	ManageDatesForm manageDatesForm= new ManageDatesForm();
+
+		 	manageDatesForm.setId(manageDates.getId());
+		 	manageDatesForm.setName(manageDates.getName());
+		 	manageDatesForm.setYear(manageDates.getYear());
+		 	manageDatesForm.setMonth(manageDates.getMonth());
+		 	manageDatesForm.setDate(manageDates.getDate());
+	        
+		 	return manageDatesForm;
+	    }
+	 
+//	 
 	
 }
