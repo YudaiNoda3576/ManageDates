@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.example.demo.app.ManageDatesForm;
 import com.example.demo.entity.ManageDates;
 
 public interface ManageDatesService {
@@ -15,9 +16,9 @@ public interface ManageDatesService {
 	
 	List<LocalDate> search(String input);
 	
-    Optional<ManageDates> findOne(String id);
+//  Optional<ManageDates> findOne(String id);
     
-//	ManageDates findOne(String id);
+	ManageDates findOne(String id);
     
 	void insert(ManageDates manageDates);
 	

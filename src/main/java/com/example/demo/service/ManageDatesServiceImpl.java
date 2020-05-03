@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.app.ManageDatesForm;
 import com.example.demo.dao.ManageDatesDao;
 import com.example.demo.entity.ManageDates;
 
@@ -24,10 +25,6 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 		this.dao = dao;
 	}
 	
-//	@Override
-//	public int count() {
-//		return dao.count();
-//	}
 
 	@Override
 	public List<ManageDates> findAll() {
@@ -59,27 +56,15 @@ public class ManageDatesServiceImpl implements ManageDatesService {
 			return sumDate;
 		}
 
-		@Override
-		public Optional<ManageDates> findOne(String id) {
-//			値がなければ例外発生
-//			チェック例外を非チェック例外に直して、一括で管理するようにする（議論あり）
-			try {
-				return dao.findOne(id);
-			} catch (EmptyResultDataAccessException e) {
-				throw new ManageDatesNotFoundException("指定された値が存在しません");
-			}
-		}
 	
-//	@Override
-//	public ManageDates findOne(String id) {
-//		値がなければ例外発生
-//		チェック例外を非チェック例外に直して、一括で管理するようにする（議論あり）
-//		try {
-//			return dao.findOne(id);
-//		} catch (EmptyResultDataAccessException e) {
-//			throw new ManageDatesNotFoundException("指定された値が存在しません");
-//		}
-//	}
+	@Override
+	public ManageDates findOne(String id) {
+		try {
+			return dao.findOne(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ManageDatesNotFoundException("指定された値が存在しません");
+		}
+	}
 	
 
 		@Override

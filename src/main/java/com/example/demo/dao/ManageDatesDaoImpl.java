@@ -36,7 +36,7 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 //		String sql = "SELECT * FROM manage_dates";
 //		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(sql);
 //		下の1行にまとめた
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList("SELECT * FROM manage_dates");
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList("SELECT * FROM manage_dates2");
 //		結果返却用の変数
 		List<ManageDates>list = new ArrayList<ManageDates>();
 		for(Map<String, Object> result : resultList) {
@@ -52,14 +52,14 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 		return list;
 	}
 	
+
+	
 	@Override
-//	Optionalはnullに対処する方法
-	public Optional<ManageDates> findOne(String id) {
-//		String sql = "SELECT id, name, year, month, date"		
-//				+ "WHERE id = ?";
-//		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
-////		一件取得/上の処理を1行にまとめた↓　WHEREのPreparedStatementと第二引数のidが紐づく
-		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates2" + " WHERE id = ?", id);
+	public ManageDates findOne(String id) {
+
+		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" 
+				+ " WHERE id = ?"
+				, id);
 //		結果返却用の変数
 		ManageDates manageDates = new ManageDates();
 		
@@ -68,29 +68,9 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 		manageDates.setYear((int)result.get("year"));
 		manageDates.setMonth((int)result.get("month"));
 		manageDates.setDate((int)result.get("date"));
-//		Optionalでラップする
-		Optional<ManageDates> manageDatesOpt = Optional.ofNullable(manageDates);
-		
-		return manageDatesOpt;
-	}
 	
-//	@Override
-//	public ManageDates findOne(String id) {
-//
-//		Map<String, Object> result = jdbcTemplate.queryForMap("SELECT * FROM manage_dates" 
-//				+ " WHERE id = ?"
-//				, id);
-//		結果返却用の変数
-//		ManageDates manageDates = new ManageDates();
-//		
-//		manageDates.setId((String)result.get("id"));
-//		manageDates.setName((String)result.get("name"));
-//		manageDates.setYear((int)result.get("year"));
-//		manageDates.setMonth((int)result.get("month"));
-//		manageDates.setDate((int)result.get("date"));
-//	
-//		return manageDates;
-//	}
+		return manageDates;
+	}
 	
 	
 	
@@ -98,18 +78,15 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 //	新規登録・更新・削除にupdateメソッドを使う
 	@Override
 	public void insert(ManageDates manageDates) {
-		 jdbcTemplate.update("INSERT INTO manage_dates(id, name, year, month, date) VALUES (?, ?, ?, ? ,?)",
+		 jdbcTemplate.update("INSERT INTO manage_dates2(id, name, year, month, date) VALUES (?, ?, ?, ? ,?)",
 				manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
 	}
 	
 	@Override
 	public int update(ManageDates manageDates) {
-//		return jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
-//			manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate());
-		 int result = jdbcTemplate.update("UPDATE manage_dates SET id = ?, name = ?, year = ?, month = ?, date = ? WHERE id = ?",
-			manageDates.getId(), manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate()); 
+		return jdbcTemplate.update("UPDATE manage_dates2" +" SET" +" name = ?," +" year = ?," +" month = ?," +" date = ?" +" WHERE id = ?"
+			, manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate(), manageDates.getId());
 		 
-			 return result;
 	}
 
 	@Override
