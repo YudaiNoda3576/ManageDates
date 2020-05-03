@@ -114,7 +114,9 @@ public class ManageDatesController {
 	 	manageDates.setYear(manageDatesForm.getYear());
 	 	manageDates.setMonth(manageDatesForm.getMonth());
 	 	manageDates.setDate(manageDatesForm.getDate());
-	 		
+	 	
+	 	manageDates.setId(id);
+	 	
 	 	manageDatesService.update(manageDates);
  
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
