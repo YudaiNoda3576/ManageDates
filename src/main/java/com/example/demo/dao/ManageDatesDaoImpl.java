@@ -83,8 +83,8 @@ public class ManageDatesDaoImpl implements ManageDatesDao {
 	}
 	
 	@Override
-	public int update(ManageDates manageDates) {
-		return jdbcTemplate.update("UPDATE manage_dates2" +" SET" +" name = ?," +" year = ?," +" month = ?," +" date = ?" +" WHERE id = ?"
+	public void update(ManageDates manageDates) {
+		 jdbcTemplate.update("UPDATE manage_dates2" +" SET" +" name = ?," +" year = ?," +" month = ?," +" date = ?" +" WHERE id = ?"
 			, manageDates.getName(), manageDates.getYear(), manageDates.getMonth(), manageDates.getDate(), manageDates.getId());
 		 
 	}
