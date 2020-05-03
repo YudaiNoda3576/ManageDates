@@ -19,7 +19,7 @@ public interface ManageDatesDao {
 	
 	void insert(ManageDates manageDates);
 	
-	void update(ManageDates manageDates);
+	int update(ManageDates manageDates);
 	
 	int delete(String id);
 

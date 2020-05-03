@@ -22,7 +22,7 @@ public interface ManageDatesService {
     
 	void insert(ManageDates manageDates);
 	
-	void update(ManageDates manageDates);
+	boolean update(ManageDates manageDates);
 	
 	boolean delete(String id);
 	
