@@ -30,7 +30,7 @@ public class ManageDatesController {
 //	public ManageDatesController(ManageDatesService manageDatesService) {
 //		this.manageDatesService = manageDatesService;
 //	}
-//	上の処理を1行でまとめた
+//	上の処理を1行でまとめた↓
 	@Autowired
 	ManageDatesService manageDatesService;
 
@@ -95,60 +95,32 @@ public class ManageDatesController {
 	
 	@GetMapping("/edit/{id}")
 	public String getId(@PathVariable String id, 
-			Model model,
+		    Model model,
 			RedirectAttributes redirectAttributes) {
-		Optional<ManageDates> result = manageDatesService.findOne(id);
+		ManageDates result = manageDatesService.findOne(id);
 		model.addAttribute("manageDates", result);
 		return "edit";
 	}
-	
-	@PostMapping("/edit/{id}")
-	public String getId(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
-			Model model, RedirectAttributes redirectAttributes) {
-//		ManageDatesの取得.Optionalでラップ
-		Optional<ManageDates> manageDatesOpt = manageDatesService.findOne(id);
-//		Formへ詰め直すメソッドを使用、ラムダ式を使えば1行で終わらせられる
-		Optional<ManageDatesForm> manageDatesFormOpt = manageDatesOpt.map(t -> makeManageDatesForm(t));
-//		TaskFormの中身がnullで無ければ中身を取り出す
-		if(manageDatesFormOpt.isPresent()) {
-			manageDatesForm = manageDatesFormOpt.get();
-		}
 		
-		model.addAttribute("manageDatesForm", manageDatesForm);
+
+	@PostMapping("/edit/{id}")
+	public String update(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
+			Model model, RedirectAttributes redirectAttributes) {
+			
+		ManageDates manageDates = new ManageDates();
+		
+	 	manageDates.setId(manageDatesForm.getId());
+	 	manageDates.setName(manageDatesForm.getName());
+	 	manageDates.setYear(manageDatesForm.getYear());
+	 	manageDates.setMonth(manageDatesForm.getMonth());
+	 	manageDates.setDate(manageDatesForm.getDate());
+	 		
+	 	manageDatesService.update(manageDates);
+ 
 		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
 		
 		return "redirect:/";
 	}
-	
-//	@GetMapping("/edit/{id}")
-//	public String getId(@PathVariable String id, 
-//			Model model,
-//			RedirectAttributes redirectAttributes) {
-//		ManageDates result = manageDatesService.findOne(id);
-//		model.addAttribute("manageDates", result);
-//		return "edit";
-//	}
-//	
-//	@PostMapping("/edit/{id}")
-//	public String getId(@PathVariable String id, @ModelAttribute ManageDatesForm manageDatesForm,
-//			Model model, RedirectAttributes redirectAttributes) {
-//		
-//		if(id != null && id.length() > 0) {
-//			
-//		ManageDates manageDates = manageDatesService.findOne(id);
-//		
-//	 	manageDatesForm.setId(manageDates.getId());
-//	 	manageDatesForm.setName(manageDates.getName());
-//	 	manageDatesForm.setYear(manageDates.getYear());
-//	 	manageDatesForm.setMonth(manageDates.getMonth());
-//	 	manageDatesForm.setDate(manageDates.getDate());
-//        
-//		model.addAttribute("manageDatesForm", manageDatesForm);
-//		redirectAttributes.addFlashAttribute("success", "更新が完了しました");
-//		
-//		}
-//		return "redirect:/";
-//	}
 	
 	
 	@GetMapping("/delete/{id}")
@@ -158,17 +130,4 @@ public class ManageDatesController {
 		return "redirect:/index";
 	}
 	
-//	manageDatesのデータをフォームに詰めるメソッド
-	 private ManageDatesForm makeManageDatesForm(ManageDates manageDates) {
-	    	
-		 	ManageDatesForm manageDatesForm= new ManageDatesForm();
-
-		 	manageDatesForm.setId(manageDates.getId());
-		 	manageDatesForm.setName(manageDates.getName());
-		 	manageDatesForm.setYear(manageDates.getYear());
-		 	manageDatesForm.setMonth(manageDates.getMonth());
-		 	manageDatesForm.setDate(manageDates.getDate());
-	        
-		 	return manageDatesForm;
-	    }	
 }
