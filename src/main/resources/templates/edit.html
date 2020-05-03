@@ -11,11 +11,9 @@
 <body>
 	<div class="text-center">
 		<h2 class="text-center">更新画面</h2>
-		<h3 th:text="${failed}"></h3>
+		<h3 th:text="${success}"></h3>
 	</div>
-		<!-- th:objectでModelに登録されているオブジェクトを取得できる.
-		     つまり、戻るボタンを押した際などに値をそのままフォームに反映させることが出来る -->
-		<form class="form-signin m-auto" method="post" th:action="@{/edit/{id}}" th:object="${manageDatesForm}" style="max-width: 50%;">
+		<form class="form-signin m-auto" method="post" th:action="@{/edit/{id}(id=${manageDates.id})}" th:object="${manageDatesForm}" style="max-width: 50%;">
 			  <div class="form-group">
 			    <label for = "id">日付けID</label>
 				  <input id="id" type="text" class="form-control" name="id" th:value="${id}" /> 
